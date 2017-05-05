@@ -23,6 +23,10 @@ public class Calculadora extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField Pantalla;
+	private int operacion=0;
+	private double numero1;
+	private double numero2;
+	private double resultado;
 
 	/**
 	 * Launch the application.
@@ -112,6 +116,11 @@ public class Calculadora extends JFrame {
 		panel_2.setLayout(gbl_panel_2);
 		
 		JButton Siete = new JButton("7");
+		Siete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Pantalla.setText(Pantalla.getText()+7);
+			}
+		});
 		GridBagConstraints gbc_Siete = new GridBagConstraints();
 		gbc_Siete.fill = GridBagConstraints.BOTH;
 		gbc_Siete.insets = new Insets(0, 0, 5, 5);
@@ -120,6 +129,11 @@ public class Calculadora extends JFrame {
 		panel_2.add(Siete, gbc_Siete);
 		
 		JButton Ocho = new JButton("8");
+		Ocho.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Pantalla.setText(Pantalla.getText()+8);
+			}
+		});
 		GridBagConstraints gbc_Ocho = new GridBagConstraints();
 		gbc_Ocho.fill = GridBagConstraints.BOTH;
 		gbc_Ocho.insets = new Insets(0, 0, 5, 5);
@@ -128,6 +142,11 @@ public class Calculadora extends JFrame {
 		panel_2.add(Ocho, gbc_Ocho);
 		
 		JButton Nueve = new JButton("9");
+		Nueve.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Pantalla.setText(Pantalla.getText()+9);
+			}
+		});
 		GridBagConstraints gbc_Nueve = new GridBagConstraints();
 		gbc_Nueve.fill = GridBagConstraints.BOTH;
 		gbc_Nueve.insets = new Insets(0, 0, 5, 0);
@@ -136,6 +155,11 @@ public class Calculadora extends JFrame {
 		panel_2.add(Nueve, gbc_Nueve);
 		
 		JButton Cuatro = new JButton("4");
+		Cuatro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Pantalla.setText(Pantalla.getText()+4);
+			}
+		});
 		GridBagConstraints gbc_Cuatro = new GridBagConstraints();
 		gbc_Cuatro.fill = GridBagConstraints.BOTH;
 		gbc_Cuatro.insets = new Insets(0, 0, 5, 5);
@@ -144,6 +168,11 @@ public class Calculadora extends JFrame {
 		panel_2.add(Cuatro, gbc_Cuatro);
 		
 		JButton Cinco = new JButton("5");
+		Cinco.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Pantalla.setText(Pantalla.getText()+5);
+			}
+		});
 		GridBagConstraints gbc_Cinco = new GridBagConstraints();
 		gbc_Cinco.fill = GridBagConstraints.BOTH;
 		gbc_Cinco.insets = new Insets(0, 0, 5, 5);
@@ -154,10 +183,16 @@ public class Calculadora extends JFrame {
 		JButton Uno = new JButton("1");
 		Uno.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				Pantalla.setText(Pantalla.getText()+1);
 			}
 		});
 		
 		JButton Seis = new JButton("6");
+		Seis.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Pantalla.setText(Pantalla.getText()+6);
+			}
+		});
 		GridBagConstraints gbc_Seis = new GridBagConstraints();
 		gbc_Seis.fill = GridBagConstraints.BOTH;
 		gbc_Seis.insets = new Insets(0, 0, 5, 0);
@@ -172,6 +207,11 @@ public class Calculadora extends JFrame {
 		panel_2.add(Uno, gbc_Uno);
 		
 		JButton Dos = new JButton("2");
+		Dos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Pantalla.setText(Pantalla.getText()+2);
+			}
+		});
 		GridBagConstraints gbc_Dos = new GridBagConstraints();
 		gbc_Dos.fill = GridBagConstraints.BOTH;
 		gbc_Dos.insets = new Insets(0, 0, 5, 5);
@@ -180,6 +220,11 @@ public class Calculadora extends JFrame {
 		panel_2.add(Dos, gbc_Dos);
 		
 		JButton Tres = new JButton("3");
+		Tres.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Pantalla.setText(Pantalla.getText()+3);
+			}
+		});
 		GridBagConstraints gbc_Tres = new GridBagConstraints();
 		gbc_Tres.fill = GridBagConstraints.BOTH;
 		gbc_Tres.insets = new Insets(0, 0, 5, 0);
@@ -188,6 +233,11 @@ public class Calculadora extends JFrame {
 		panel_2.add(Tres, gbc_Tres);
 		
 		JButton Punto = new JButton(".");
+		Punto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Pantalla.setText(Pantalla.getText()+".");
+			}
+		});
 		GridBagConstraints gbc_Punto = new GridBagConstraints();
 		gbc_Punto.fill = GridBagConstraints.BOTH;
 		gbc_Punto.insets = new Insets(0, 0, 0, 5);
@@ -196,6 +246,11 @@ public class Calculadora extends JFrame {
 		panel_2.add(Punto, gbc_Punto);
 		
 		JButton Cero = new JButton("0");
+		Cero.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Pantalla.setText(Pantalla.getText()+0);
+			}
+		});
 		GridBagConstraints gbc_Cero = new GridBagConstraints();
 		gbc_Cero.fill = GridBagConstraints.BOTH;
 		gbc_Cero.insets = new Insets(0, 0, 0, 5);
@@ -204,6 +259,17 @@ public class Calculadora extends JFrame {
 		panel_2.add(Cero, gbc_Cero);
 		
 		JButton MasMenos = new JButton("+/-");
+		MasMenos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Double aux=Double.parseDouble(Pantalla.getText());
+				if(aux>0){
+					Pantalla.setText("-"+Pantalla.getText());
+				} else{
+					Pantalla.setText(Pantalla.getText().substring(1));
+				}
+				
+			}
+		});
 		GridBagConstraints gbc_MasMenos = new GridBagConstraints();
 		gbc_MasMenos.fill = GridBagConstraints.BOTH;
 		gbc_MasMenos.gridx = 2;
@@ -227,6 +293,9 @@ public class Calculadora extends JFrame {
 		JButton Mas = new JButton("+");
 		Mas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				numero1=Double.parseDouble(Pantalla.getText());
+				operacion=1;
+				Pantalla.setText("");
 			}
 		});
 		GridBagConstraints gbc_Mas = new GridBagConstraints();
@@ -237,6 +306,13 @@ public class Calculadora extends JFrame {
 		panel_3.add(Mas, gbc_Mas);
 		
 		JButton Menos = new JButton("-");
+		Menos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				numero1=Double.parseDouble(Pantalla.getText());
+				operacion=2;
+				Pantalla.setText("");
+			}
+		});
 		GridBagConstraints gbc_Menos = new GridBagConstraints();
 		gbc_Menos.fill = GridBagConstraints.BOTH;
 		gbc_Menos.insets = new Insets(0, 0, 5, 0);
@@ -245,6 +321,13 @@ public class Calculadora extends JFrame {
 		panel_3.add(Menos, gbc_Menos);
 		
 		JButton Por = new JButton("x");
+		Por.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				numero1=Double.parseDouble(Pantalla.getText());
+				operacion=3;
+				Pantalla.setText("");
+			}
+		});
 		GridBagConstraints gbc_Por = new GridBagConstraints();
 		gbc_Por.fill = GridBagConstraints.BOTH;
 		gbc_Por.insets = new Insets(0, 0, 5, 0);
@@ -253,6 +336,13 @@ public class Calculadora extends JFrame {
 		panel_3.add(Por, gbc_Por);
 		
 		JButton Entre = new JButton("/");
+		Entre.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				numero1=Double.parseDouble(Pantalla.getText());
+				operacion=4;
+				Pantalla.setText("");
+			}
+		});
 		GridBagConstraints gbc_Entre = new GridBagConstraints();
 		gbc_Entre.fill = GridBagConstraints.BOTH;
 		gbc_Entre.gridx = 0;
@@ -268,9 +358,35 @@ public class Calculadora extends JFrame {
 		panel_4.setLayout(new GridLayout(2, 1, 0, 0));
 		
 		JButton Clear = new JButton("CLEAR");
+		Clear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Pantalla.setText("");
+			}
+		});
 		panel_4.add(Clear);
 		
 		JButton Igual = new JButton("=");
+		Igual.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (operacion==1){
+					numero2=Double.parseDouble(Pantalla.getText());
+					resultado=numero1+numero2;
+					Pantalla.setText(String.valueOf(resultado));
+				} else if (operacion==2){
+					numero2=Double.parseDouble(Pantalla.getText());
+					resultado=numero1-numero2;
+					Pantalla.setText(String.valueOf(resultado));
+				} else if (operacion==3){
+					numero2=Double.parseDouble(Pantalla.getText());
+					resultado=numero1*numero2;
+					Pantalla.setText(String.valueOf(resultado));
+				} else if (operacion==4){
+					numero2=Double.parseDouble(Pantalla.getText());
+					resultado=numero1/numero2;
+					Pantalla.setText(String.valueOf(resultado));
+				}
+			}
+		});
 		panel_4.add(Igual);
 	}
 
