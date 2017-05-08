@@ -18,6 +18,8 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
 
 public class Calculadora extends JFrame {
 
@@ -69,6 +71,7 @@ public class Calculadora extends JFrame {
 		contentPane.add(panel, gbc_panel);
 		
 		Pantalla = new JTextField();
+		Pantalla.setHorizontalAlignment(SwingConstants.RIGHT);
 		Pantalla.setEditable(false);
 		Pantalla.setColumns(10);
 		GroupLayout gl_panel = new GroupLayout(panel);
@@ -264,7 +267,7 @@ public class Calculadora extends JFrame {
 				Double aux=Double.parseDouble(Pantalla.getText());
 				if(aux>0){
 					Pantalla.setText("-"+Pantalla.getText());
-				} else{
+				} else if(aux<0){
 					Pantalla.setText(Pantalla.getText().substring(1));
 				}
 				
@@ -368,22 +371,24 @@ public class Calculadora extends JFrame {
 		JButton Igual = new JButton("=");
 		Igual.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				numero2=Double.parseDouble(Pantalla.getText());
 				if (operacion==1){
-					numero2=Double.parseDouble(Pantalla.getText());
 					resultado=numero1+numero2;
 					Pantalla.setText(String.valueOf(resultado));
 				} else if (operacion==2){
-					numero2=Double.parseDouble(Pantalla.getText());
 					resultado=numero1-numero2;
 					Pantalla.setText(String.valueOf(resultado));
 				} else if (operacion==3){
-					numero2=Double.parseDouble(Pantalla.getText());
 					resultado=numero1*numero2;
 					Pantalla.setText(String.valueOf(resultado));
 				} else if (operacion==4){
-					numero2=Double.parseDouble(Pantalla.getText());
-					resultado=numero1/numero2;
-					Pantalla.setText(String.valueOf(resultado));
+					if (numero2!=0){
+						resultado=numero1/numero2;
+						Pantalla.setText(String.valueOf(resultado));
+					}
+					else {
+						JOptionPane.showMessageDialog(null, "Error! Division por cero");
+					}
 				}
 			}
 		});
