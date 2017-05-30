@@ -25,43 +25,14 @@ public class EliminarLibro extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					EliminarLibro frame = new EliminarLibro();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 
 	/**
 	 * Create the frame.
 	 */
-	public EliminarLibro() {
+	public EliminarLibro(ListaLibro listaLibro) {
 		
 		
-		ListaLibro listaLibro = new ListaLibro();
-		listaLibro.insertarFinal(new NodoLibro(new Libro("ELoy","cinco",5)));
-		listaLibro.insertarFinal(new NodoLibro(new Libro("ELsoy","cinco",5)));
-		listaLibro.insertarFinal(new NodoLibro(new Libro("ELhoy","cico",5)));
-		listaLibro.insertarFinal(new NodoLibro(new Libro("ELsoy","cnco",5)));
-		listaLibro.insertarFinal(new NodoLibro(new Libro("ELhoy","cinco",5)));
-		listaLibro.insertarFinal(new NodoLibro(new Libro("ELoy","cico",5)));
-		listaLibro.insertarFinal(new NodoLibro(new Libro("ELsoy","cnco",5)));
-		listaLibro.insertarFinal(new NodoLibro(new Libro("ELhoy","cnco",5)));
-		listaLibro.insertarFinal(new NodoLibro(new Libro("ELoy","cinco",5)));
-		listaLibro.insertarFinal(new NodoLibro(new Libro("ELsoy","cinco",5)));
-		listaLibro.insertarFinal(new NodoLibro(new Libro("ELhoy","cnco",5)));
-		listaLibro.insertarFinal(new NodoLibro(new Libro("ELoy","cico",5)));
-		listaLibro.insertarFinal(new NodoLibro(new Libro("ELsoy","cinco",5)));
-		listaLibro.insertarFinal(new NodoLibro(new Libro("ELhoy","inco",5)));
-		listaLibro.insertarFinal(new NodoLibro(new Libro("ELoy","cinco",5)));
-		listaLibro.insertarFinal(new NodoLibro(new Libro("ELsoy","cico",5)));
-		listaLibro.insertarFinal(new NodoLibro(new Libro("ELhoy","cco",5)));
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 226);
@@ -86,6 +57,8 @@ public class EliminarLibro extends JFrame {
 					JOptionPane.showMessageDialog(null, "Se ha eliminado correctamente");
 				else
 					JOptionPane.showMessageDialog(null,"No se ha podido eliminar el libro");
+				
+				dispose();
 
 			}
 			

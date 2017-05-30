@@ -100,7 +100,7 @@ public class menu extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				if (rdbtnIntroducirUnLibro.isSelected()) {
 					try {
-						IntoducirLibro frame = new IntoducirLibro();
+						IntoducirLibro frame = new IntoducirLibro(listaLibro);
 						frame.setVisible(true);
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -108,7 +108,7 @@ public class menu extends JFrame {
 						
 				}else if (rdbtnEliminarLibro.isSelected()) {
 					try {
-						EliminarLibro frame = new EliminarLibro();
+						EliminarLibro frame = new EliminarLibro(listaLibro);
 						frame.setVisible(true);
 					} catch (Exception e) {
 						e.printStackTrace();

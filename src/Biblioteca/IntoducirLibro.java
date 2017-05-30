@@ -32,25 +32,14 @@ public class IntoducirLibro extends JFrame {
 	
 
 	
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					IntoducirLibro frame = new IntoducirLibro();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 
 	/**
 	 * Create the frame.
 	 */
-	public IntoducirLibro() {
+	public IntoducirLibro(ListaLibro listaLibro) {
 		
-		ListaLibro listaLibro = new ListaLibro(); 
+		 
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 339, 229);
@@ -80,6 +69,8 @@ public class IntoducirLibro extends JFrame {
 
 				listaLibro.insertarFinal(new NodoLibro(new Libro(textFieldAutor.getText(),textFieldTitulo.getText(),ejemplares)));
 				JOptionPane.showMessageDialog(null, "Registro completado");
+				
+				dispose();
 				
 				
 			}
