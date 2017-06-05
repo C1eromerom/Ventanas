@@ -115,12 +115,30 @@ public class menu extends JFrame {
 					}
 						
 				}else if (rdbtnRegistrarUsuario.isSelected()) {
+					try {
+						RegistrarUsuario frame = new RegistrarUsuario(listaUsuario);
+						frame.setVisible(true);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 					
 						
 				}else if (rdbtnEliminarUsuario.isSelected()) {
+					try {
+						EliminarUsuario frame = new EliminarUsuario(listaUsuario);
+						frame.setVisible(true);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 					
 						
 				}else if (rdbtnPrestarLibro.isSelected()) {
+					try {
+						prestarLibro frame = new prestarLibro(listaLibro,listaUsuario);
+						frame.setVisible(true);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 					
 						
 				}else if (rdbtnListarUsuarios.isSelected()) {

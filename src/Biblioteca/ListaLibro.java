@@ -18,6 +18,24 @@ public class ListaLibro implements Serializable{
 		return tamano;
 	}
 	
+	public NodoLibro getPosicion(int posicion){
+
+		if(posicion<0 || posicion>tamano) return null;
+		else{
+			NodoLibro aux = inicio;
+			if(posicion==0){
+
+				return inicio;
+			}else{
+				for(int i=0;i<posicion-1;i++){
+					aux = aux.getSiguiente();
+				}
+			}
+			return aux;
+		}
+			
+	}
+	
 	public void setInicio(NodoLibro inicio){
 		this.inicio = inicio;
 	}
@@ -102,23 +120,24 @@ public class ListaLibro implements Serializable{
 		}
 	}
 	
-	public boolean eliminarUltimo(){
+	public NodoLibro eliminarUltimo(){
 		int i = 0;
-		if(inicio==null) return false;
+		if(inicio==null) return null;
 		else{
 			NodoLibro aux = inicio;
 			while(i<tamano-2){
 				aux=aux.getSiguiente();
 				i++;
 			}
+			NodoLibro aux2 =aux.getSiguiente();
 			aux.setSiguiente(null);
 			tamano--;
-			return true;
+			return aux2;
 		}
 	}
 	
 	public boolean eliminarPosicion(int posicion){
-		if(posicion<0 || posicion>tamano) return false;
+		if(posicion<0 || posicion>tamano-1)  return false;
 		else{
 			NodoLibro aux = inicio;
 			NodoLibro aux2 = inicio;

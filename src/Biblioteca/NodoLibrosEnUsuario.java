@@ -2,16 +2,16 @@ package Biblioteca;
 import java.io.*;
 
 public class NodoLibrosEnUsuario implements Serializable{
-	private String titulo;
+	private Libro libro;
 	private NodoLibrosEnUsuario siguiente;
 	
-	public NodoLibrosEnUsuario(String titulo){
-		this.titulo = titulo;
+	public NodoLibrosEnUsuario(Libro titulo){
+		this.libro = titulo;
 		this.siguiente = null;
 	}
 	
 	public NodoLibrosEnUsuario(){
-		this.titulo = "";
+		this.libro = null;
 		siguiente = null;
 	}
 
@@ -25,6 +25,6 @@ public class NodoLibrosEnUsuario implements Serializable{
 	}
 	
 	public String toString(){
-		return "Nombre: " + this.titulo;
+		return "Nombre: " + this.libro;
 	}
 }

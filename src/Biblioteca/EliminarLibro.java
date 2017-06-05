@@ -17,6 +17,7 @@ import javax.swing.JSpinner;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class EliminarLibro extends JFrame {
 
@@ -53,16 +54,23 @@ public class EliminarLibro extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				int posicion=(Integer)spinner.getValue();
-				if(listaLibro.eliminarPosicion(posicion))
+				if(listaLibro.eliminarPosicion(posicion)){
 					JOptionPane.showMessageDialog(null, "Se ha eliminado correctamente");
-				else
-					JOptionPane.showMessageDialog(null,"No se ha podido eliminar el libro");
+					textAreaLibros.setText(listaLibro.mostrarTitulos());
 				
-				dispose();
+				}else
+					JOptionPane.showMessageDialog(null,"No se ha podido eliminar el libro");
 
 			}
 			
 			
+		});
+		
+		JButton btnAtrs = new JButton("Atrás");
+		btnAtrs.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+			}
 		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
@@ -75,11 +83,14 @@ public class EliminarLibro extends JFrame {
 							.addGap(86)
 							.addComponent(spinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(32)
+							.addGap(9)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-								.addComponent(btnAceptar)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addComponent(btnAtrs)
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(btnAceptar))
 								.addComponent(lblPosicinDelLibro))))
-					.addContainerGap(75, Short.MAX_VALUE))
+					.addContainerGap(18, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -92,7 +103,9 @@ public class EliminarLibro extends JFrame {
 							.addGap(18)
 							.addComponent(spinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 							.addGap(18)
-							.addComponent(btnAceptar)))
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+								.addComponent(btnAceptar)
+								.addComponent(btnAtrs))))
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		contentPane.setLayout(gl_contentPane);

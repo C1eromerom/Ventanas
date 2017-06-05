@@ -25,6 +25,7 @@ public class IntoducirLibro extends JFrame {
 	private JPanel contentPane;
 	private JTextField textFieldTitulo;
 	private JTextField textFieldAutor;
+	private JTextField textFieldISBN;
 
 	/**
 	 * Launch the application.
@@ -42,7 +43,7 @@ public class IntoducirLibro extends JFrame {
 		 
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 339, 229);
+		setBounds(100, 100, 425, 338);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -59,48 +60,69 @@ public class IntoducirLibro extends JFrame {
 		textFieldAutor = new JTextField();
 		textFieldAutor.setColumns(10);
 		
+		JLabel lblIsbn = new JLabel("ISBN");
+		
+		textFieldISBN = new JTextField();
+		textFieldISBN.setColumns(10);
+		
 		JSpinner spinner = new JSpinner();
-		spinner.setModel(new SpinnerNumberModel(0, 0, 120, 1));
+		spinner.setModel(new SpinnerNumberModel(1, 1, 120, 1));
 		
 		JButton btnAceptar = new JButton("Aceptar");
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int ejemplares=(Integer)spinner.getValue();
-
-				listaLibro.insertarFinal(new NodoLibro(new Libro(textFieldAutor.getText(),textFieldTitulo.getText(),ejemplares)));
-				JOptionPane.showMessageDialog(null, "Registro completado");
 				
-				dispose();
+				if (ejemplares<=0){
+					JOptionPane.showMessageDialog(null, "Numero de ejemplares invalido");
+				}else{
+					ListaLibro Listaejemplares = null;
+
+				listaLibro.insertarFinal(new NodoLibro(new Libro(textFieldAutor.getText(),textFieldTitulo.getText(),ejemplares, textFieldISBN.getText())));
+				JOptionPane.showMessageDialog(null, "Registro completado");
+				}
 				
 				
 			}
 
 		});
 		
+		JButton btnAtrs = new JButton("Atrás");
+		btnAtrs.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+			}
+		});
+		
+		
+		
 		
 		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
+				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addContainerGap()
+							.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 								.addComponent(lblTituloDelLibro)
 								.addComponent(lblNombreDelAutor)
-								.addComponent(lblNumeroDeEjemplares))
-							.addGap(18)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addGap(10)
-									.addComponent(spinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-								.addComponent(textFieldAutor, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(textFieldTitulo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+								.addComponent(lblNumeroDeEjemplares)
+								.addComponent(lblIsbn))
+							.addGap(24))
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(73)
-							.addComponent(btnAceptar)))
-					.addContainerGap(31, Short.MAX_VALUE))
+							.addGap(55)
+							.addComponent(btnAtrs)
+							.addPreferredGap(ComponentPlacement.RELATED)))
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addComponent(spinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(textFieldAutor, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(textFieldTitulo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+							.addComponent(btnAceptar)
+							.addComponent(textFieldISBN, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap(72, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -112,15 +134,23 @@ public class IntoducirLibro extends JFrame {
 					.addGap(18)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addComponent(lblNombreDelAutor)
+						.addComponent(textFieldAutor, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(18)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addComponent(textFieldISBN, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblIsbn))
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(textFieldAutor, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 							.addGap(18)
+							.addComponent(lblNumeroDeEjemplares)
+							.addGap(67)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblNumeroDeEjemplares)
-								.addComponent(spinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
-					.addGap(34)
-					.addComponent(btnAceptar)
-					.addContainerGap(17, Short.MAX_VALUE))
+								.addComponent(btnAceptar)
+								.addComponent(btnAtrs)))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(18)
+							.addComponent(spinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+					.addGap(61))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}

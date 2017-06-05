@@ -19,6 +19,7 @@ public class NodoLibro implements Serializable{
 		return libro;
 	}
 
+
 	public void setLibro(Libro libro) {
 		this.libro = libro;
 	}

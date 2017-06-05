@@ -118,7 +118,7 @@ public class ListaUsuario implements Serializable{
 	}
 	
 	public boolean eliminarPosicion(int posicion){
-		if(posicion<0 || posicion>tamano) return false;
+		if(posicion<0 || posicion>tamano-1) return false;
 		else{
 			NodoUsuario aux = inicio;
 			NodoUsuario aux2 = inicio;
