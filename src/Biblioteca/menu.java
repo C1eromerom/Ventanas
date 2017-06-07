@@ -126,7 +126,7 @@ public class menu extends JFrame {
 						
 				}else if (rdbtnEliminarUsuario.isSelected()) {
 					try {
-						EliminarUsuario frame = new EliminarUsuario(listaUsuario);
+						EliminarUsuario frame = new EliminarUsuario(listaUsuario,listaLibro);
 						frame.setVisible(true);
 					} catch (Exception e) {
 						e.printStackTrace();

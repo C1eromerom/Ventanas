@@ -30,7 +30,7 @@ public class EliminarUsuario extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public EliminarUsuario(ListaUsuario listaUsuario) {
+	public EliminarUsuario(ListaUsuario listaUsuario,ListaLibro listaLibro) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 226);
 		contentPane = new JPanel();
@@ -51,7 +51,9 @@ public class EliminarUsuario extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				int posicion=(Integer)spinner.getValue();
-				if(listaUsuario.eliminarPosicion(posicion)){
+				if(listaUsuario.buscarPosicion(posicion)!=null){
+					listaLibro.EliminarUsuarios(listaUsuario.buscarPosicion(posicion));
+					listaUsuario.eliminarPosicion(posicion);
 					JOptionPane.showMessageDialog(null, "Se ha eliminado correctamente");
 					textAreaUsuarios.setText(listaUsuario.mostrarNombres());
 				}else

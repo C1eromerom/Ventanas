@@ -89,11 +89,14 @@ public class DevolverLibro extends JFrame {
 		JButton btnDevolver = new JButton("Devolver");
 		btnDevolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
-				devolucion(aux.getUser(),listaLibro.buscarLibro(comboBox.getName()).getLibro(),listaLibro,comboBox);
-				//aux.getUser().getLista().eliminarPosicion(comboBox.getSelectedIndex());
+				if(devolucion(listaLibro,comboBox)==true){
 					rellenarUsuario(comboBox);
-
+					JOptionPane.showMessageDialog(null, "Devolución completada con exito");
+				}else{
+					JOptionPane.showMessageDialog(null, "No se ha podido completar la devolución");
+				}
+				
+				
 				};	
 			
 		});
@@ -165,34 +168,16 @@ public class DevolverLibro extends JFrame {
 			aux2 = aux2.getSiguiente();
 			}
 	}
-	
-	public void devolucion(Usuario user, Libro libro,ListaLibro listaLibro,JComboBox comboBox){	
-		boolean bucle=false;
-		NodoLibro auxiliar = listaLibro.getInicio(); 
-		NodoEjemplar auxiliar2 = auxiliar.getLibro().getListaEjemplares().getInicio();
-		if(listaLibro.getTamano()>0){
-			while(bucle=false){
-				auxiliar2 = auxiliar.getLibro().getListaEjemplares().getInicio();
-				if(auxiliar!=null) {
-					if(auxiliar2==null){
-						auxiliar=auxiliar.getSiguiente();
-					}else if(auxiliar2.getEjemplar().getPrestado()==true && auxiliar2.getEjemplar().getUsuario()==user){
-						auxiliar2.getEjemplar().setPrestado(false);
-						auxiliar2.getEjemplar().setUsuario(null);
-						user.getLista().eliminarPosicion(comboBox.getSelectedIndex());
-						auxiliar.getLibro().setPrestados2(1);
-						bucle=true;
-						JOptionPane.showMessageDialog(null, "Libro devuelto correctamente");
-					} else {
-						auxiliar2=auxiliar2.getSiguiente();
-					}
-
-				}else {
-					bucle=true;
-					JOptionPane.showMessageDialog(null, "El libro no se ha podido devolver");
-				}
-			}
-		}else {
-			JOptionPane.showMessageDialog(null, "El libro no se ha podido devolver");
+	public boolean devolucion(ListaLibro listaLibro,JComboBox comboBox){	
+		if(listaLibro.BuscarEjemplar(listaLibro,comboBox,aux)!=null){
+		aux.getUser().getLista().eliminarPosicion(comboBox.getSelectedIndex());
+		listaLibro.BuscarEjemplar(listaLibro,comboBox,aux).getEjemplar().setPrestado(false);
+		listaLibro.BuscarEjemplar(listaLibro,comboBox,aux).getEjemplar().setUsuario(null);
+		//listaLibro.buscarLibro(comboBox.getName()).getLibro().setPrestados2(1);
+		return true;
+		}else{
+			return false;
+		}
+		
 	}
-	}}
+	}

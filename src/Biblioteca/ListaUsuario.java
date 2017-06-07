@@ -1,6 +1,8 @@
 package Biblioteca;
 import java.io.Serializable;
 
+import javax.swing.JComboBox;
+
 public class ListaUsuario implements Serializable{
 	private NodoUsuario inicio;
 	private int tamano;
@@ -109,5 +111,44 @@ public class ListaUsuario implements Serializable{
 			
 		}
 	}
+	
+	public boolean eliminarUsuario(String n){
+		int posicion = 0;
+		boolean encontrado = false;
+		NodoUsuario aux2 = getInicio();
+		while(aux2!=null & !encontrado){
+			if(n==aux2.getUser().getNombre()){
+				encontrado=true;
+			}else{
+				aux2 = aux2.getSiguiente();
+				posicion++;
+			}
+		}
+		
+		if(posicion<0 || posicion>tamano-1)  return false;
+		else{
+			NodoUsuario aux = inicio;
+			NodoUsuario aux3 = inicio;
+			if(posicion==0){
+				eliminarPrimero();
+				return true;
+			}else{
+				for(int i=0;i<posicion-1;i++){
+					aux = aux.getSiguiente();
+			
+				}
+				for(int i=0;i<posicion+1;i++){
+					aux3 = aux3.getSiguiente();
+			
+				}
+				aux.setSiguiente(aux3);
+				tamano--;
+				return true;
+			}
+			
+		}
+		
+		
+		}
 
 }

@@ -1,6 +1,8 @@
 package Biblioteca;
 import java.io.Serializable;
 
+import javax.swing.JComboBox;
+
 public class ListaEjemplares implements Serializable{
 	private NodoEjemplar inicio;
 	private int tamano;
@@ -207,5 +209,6 @@ public class ListaEjemplares implements Serializable{
 		else
 			return null;
 	}
+
 
 }

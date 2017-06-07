@@ -1,6 +1,8 @@
 package Biblioteca;
 import java.io.Serializable;
 
+import javax.swing.JComboBox;
+
 public class ListaLibro implements Serializable{
 	private NodoLibro inicio;
 	private int tamano;
@@ -133,5 +135,48 @@ public class ListaLibro implements Serializable{
 			return null;
 		}
 	}
+	
+	public NodoEjemplar BuscarEjemplar(ListaLibro listaLibro,JComboBox comboBox,NodoUsuario user){	
+		boolean bucle=false;
+		NodoLibro auxiliar = listaLibro.getInicio(); 
+		NodoEjemplar auxiliar2 = auxiliar.getLibro().getListaEjemplares().getInicio();
+		if(listaLibro.getTamano()>0){
+			while(bucle=false){
+				auxiliar2 = auxiliar.getLibro().getListaEjemplares().getInicio();
+				if(auxiliar2==null){
+					auxiliar=auxiliar.getSiguiente();
+				}else if(auxiliar2.getEjemplar().getPrestado()==true && auxiliar2.getEjemplar().getUsuario()==user.getUser() && user.getUser().getNombre()==comboBox.getName()){
+					bucle=true;
+				} else {
+					auxiliar2=auxiliar2.getSiguiente();
+				}
+			}
+		}else {
+		}
+		return auxiliar2;
+	}
+	public void EliminarUsuarios(NodoUsuario user){	
+		boolean bucle=false;
+		NodoLibro auxiliar = getInicio(); 
+		NodoEjemplar auxiliar2 = auxiliar.getLibro().getListaEjemplares().getInicio();
+		if(getTamano()>0){
+			while(bucle=false){
+				if(auxiliar!=null){
+					auxiliar2 = auxiliar.getLibro().getListaEjemplares().getInicio();
+					if(auxiliar2==null){
+						auxiliar=auxiliar.getSiguiente();
+					}else if(auxiliar2.getEjemplar().getPrestado()==true && auxiliar2.getEjemplar().getUsuario()==user.getUser()){
+						auxiliar2.getEjemplar().setPrestado(false);
+						auxiliar2.getEjemplar().setUsuario(null);
+					}else{
+						auxiliar2=auxiliar2.getSiguiente();
+					}
+				} else {
+				bucle=true;
+				}
+			}
+		}
+	}
+
 
 }

@@ -291,12 +291,17 @@ public class prestarLibro extends JFrame {
 				if(auxL2.getEjemplar().getPrestado()==true) {
 					auxL2=auxL2.getSiguiente();
 				}else {
+					if(aux2.getUser().getLista().buscarEjemplar(auxL2.getEjemplar().getTitulo())!=null){
+						JOptionPane.showMessageDialog(null, "Este usuario ya tiene este libro");
+						bucle=false;
+					}else{
 					aux2.getUser().insertarLibro(auxL2.getEjemplar());
 					auxL2.getEjemplar().setUsuario(aux2.getUser());
 					auxL2.getEjemplar().setPrestado(true);
 					aux.getLibro().setPrestados1(1);
 					JOptionPane.showMessageDialog(null, "Prestado correctamente");
 					bucle=false;
+					}
 				}
 			}else {
 				JOptionPane.showMessageDialog(null, "Lo siento, no quedan ejemplares para prestar");
