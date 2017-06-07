@@ -30,10 +30,9 @@ public class prestarLibro extends JFrame {
 	private JTextField textFieldPrestados;
 	private NodoLibro aux;
 	private NodoUsuario aux2;
-	private NodoLibro aux3;
+	private NodoEjemplar aux3;
 	private JTextField textField;
 	private JTextField textField_1;
-	private JComboBox comboBox;
 	private int posicion;
 	private int posicion2;
 
@@ -53,7 +52,7 @@ public class prestarLibro extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		aux2 = listaUsuario.getInicio();
-	
+		
 	
 		
 		JLabel lblTitulo = new JLabel("Titulo");
@@ -107,12 +106,12 @@ public class prestarLibro extends JFrame {
 		textField_1.setEditable(false);
 		textField_1.setColumns(10);
 		
+		JComboBox comboBox = new JComboBox();
 		if(aux2!=null) {
-		rellenarUser();
+		rellenarUser(comboBox);
 		}
 		JLabel lblLibros = new JLabel("Libros");
-		
-		JComboBox comboBox = new JComboBox();
+
 		
 		JButton btnAnterior_1 = new JButton("Anterior");
 		btnAnterior_1.setEnabled(false);
@@ -131,7 +130,7 @@ public class prestarLibro extends JFrame {
 						posicion2=0;
 					}
 				
-				rellenarUser();
+				rellenarUser(comboBox);
 				
 			}
 		});
@@ -142,7 +141,12 @@ public class prestarLibro extends JFrame {
 		
 		
 		JButton btnAnterior = new JButton("Anterior");
-			btnAnterior.setEnabled(false);
+		btnAnterior.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
+	
 			
 		JButton btnSiguiente = new JButton("Siguiente");
 		if(aux.getSiguiente()==null) {
@@ -168,7 +172,8 @@ public class prestarLibro extends JFrame {
 		btnPrestar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				prestar(listaUsuario,listaLibro);
-				JOptionPane.showMessageDialog(null, "Prestado correctamente");
+				rellenarLibro();
+				rellenarUser(comboBox);
 				};
 		});
 		
@@ -277,34 +282,28 @@ public class prestarLibro extends JFrame {
 	}
 	
 	public void prestar(ListaUsuario listaP,ListaLibro listaL){
-		NodoUsuario auxP = listaP.getInicio();
-		NodoLibro auxL = listaL.getInicio();
-		NodoEjemplar auxL2 = auxL.getLibro().getListaEjemplares().getInicio();;
-		int contadorL = 0;
-		
-		for(int i=0;i<posicion2;i++){
-			auxP = auxP.getSiguiente();
-		}
-		
 
-		for(auxL = listaL.getInicio();auxL!=null;auxL = auxL.getSiguiente()){
-			if(contadorL<posicion){
-				auxL2 = auxL.getLibro().getListaEjemplares().getInicio();
-			}
-			
-			for(int i=0;i<auxL.getLibro().getEjemplares();i++){
-				if(contadorL<posicion){
-					auxL2 = auxL2.getSiguiente();
+		NodoEjemplar auxL2 = aux.getLibro().getListaEjemplares().getInicio();;
+		boolean bucle=true;
+		
+		while(bucle==true) {
+			if(auxL2!=null) {
+				if(auxL2.getEjemplar().getPrestado()==true) {
+					auxL2=auxL2.getSiguiente();
+				}else {
+					aux2.getUser().insertarLibro(auxL2.getEjemplar());
+					auxL2.getEjemplar().setUsuario(aux2.getUser());
+					auxL2.getEjemplar().setPrestado(true);
+					aux.getLibro().setPrestados1(1);
+					JOptionPane.showMessageDialog(null, "Prestado correctamente");
+					bucle=false;
 				}
-				if(contadorL!=posicion){
-					contadorL++;
-				}
+			}else {
+				JOptionPane.showMessageDialog(null, "Lo siento, no quedan ejemplares para prestar");
+				bucle=false;
 			}
 		}
-		
-		auxP.getUser().insertarLibro(auxL2.getEjemplar());
-		auxL2.getEjemplar().setUsuario(auxP.getUser());
-		auxL2.getEjemplar().setPrestado(true);
+	
 	}
 	
 	public void rellenarLibro() {
@@ -312,16 +311,16 @@ public class prestarLibro extends JFrame {
 		textFieldAutor.setText(aux.getLibro().getAutor());
 		textFieldISBN.setText(aux.getLibro().getISBN());
 		textFieldEjemplares.setText(String.valueOf(aux.getLibro().getListaEjemplares().getTamano()));
-		int prestados=(Integer)aux.getLibro().prestados();
-		textFieldPrestados.setText(String.valueOf(prestados));
+		textFieldPrestados.setText(String.valueOf(aux.getLibro().getPrestados()));
 	}
 	
-	public void rellenarUser() {
+	public void rellenarUser(JComboBox combobox) {
 		textField.setText(aux2.getUser().getNombre());
 		textField_1.setText(aux2.getUser().getDNI());
-		
+		aux3 = aux2.getUser().getLista().getInicio();
+		combobox.removeAllItems();
 		while(aux3!=null) {
-			comboBox.addItem(aux3.getLibro().getTitulo());
+			combobox.addItem(aux3.getEjemplar().getTitulo());
 			aux3 = aux3.getSiguiente();
 			}
 	}

@@ -57,41 +57,6 @@ public class ListaUsuario implements Serializable{
 		tamano++;
 	}
 	
-	public void insertarFinal(NodoUsuario nodo){
-		if(inicio == null) insertarInicio(nodo);
-		else{
-			NodoUsuario aux = inicio;
-			while(aux.getSiguiente()!=null){
-				aux = aux.getSiguiente();
-			
-			}
-			aux.setSiguiente(nodo);
-			tamano++;
-		}
-	}
-	
-	
-	public boolean insertarPosicion(int posicion,NodoUsuario nodo){
-		if(posicion<0 || posicion>tamano) return false;
-		else{
-			NodoUsuario aux = inicio;
-			if(posicion==0){
-				insertarInicio(nodo);
-				return true;
-			}else{
-				for(int i=0;i<posicion-1;i++){
-					aux = aux.getSiguiente();
-			
-				}
-				nodo.setSiguiente(aux.getSiguiente());
-				aux.setSiguiente(nodo);
-				tamano++;
-				return true;
-			}
-			
-		}
-	}
-	
 	public boolean eliminarPrimero(){
 		if(inicio==null) return false;
 		else{
@@ -102,20 +67,6 @@ public class ListaUsuario implements Serializable{
 		}
 	}
 	
-	public boolean eliminarUltimo(){
-		int i = 0;
-		if(inicio==null) return false;
-		else{
-			NodoUsuario aux = inicio;
-			while(i<tamano-2){
-				aux=aux.getSiguiente();
-				i++;
-			}
-			aux.setSiguiente(null);
-			tamano--;
-			return true;
-		}
-	}
 	
 	public boolean eliminarPosicion(int posicion){
 		if(posicion<0 || posicion>tamano-1) return false;

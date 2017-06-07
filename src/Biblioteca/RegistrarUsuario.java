@@ -55,7 +55,7 @@ public class RegistrarUsuario extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				if(esVacio()==false) {
-				listaUsuario.insertarFinal(new NodoUsuario(new Usuario(textFieldNombre.getText(),textFieldDNI.getText())));
+				listaUsuario.insertarInicio(new NodoUsuario(new Usuario(textFieldNombre.getText(),textFieldDNI.getText())));
 				JOptionPane.showMessageDialog(null, "Registro completado");
 				BorrarCampos();
 				}else {

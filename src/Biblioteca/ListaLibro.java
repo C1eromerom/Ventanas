@@ -75,40 +75,8 @@ public class ListaLibro implements Serializable{
 		tamano++;
 	}
 	
-	public void insertarFinal(NodoLibro nodo){
-		if(inicio == null) insertarInicio(nodo);
-		else{
-			NodoLibro aux = inicio;
-			while(aux.getSiguiente()!=null){
-				aux = aux.getSiguiente();
-			
-			}
-			aux.setSiguiente(nodo);
-			tamano++;
-		}
-	}
 	
 	
-	public boolean insertarPosicion(int posicion,NodoLibro nodo){
-		if(posicion<0 || posicion>tamano) return false;
-		else{
-			NodoLibro aux = inicio;
-			if(posicion==0){
-				insertarInicio(nodo);
-				return true;
-			}else{
-				for(int i=0;i<posicion-1;i++){
-					aux = aux.getSiguiente();
-			
-				}
-				nodo.setSiguiente(aux.getSiguiente());
-				aux.setSiguiente(nodo);
-				tamano++;
-				return true;
-			}
-			
-		}
-	}
 	
 	public boolean eliminarPrimero(){
 		if(inicio==null) return false;
@@ -120,21 +88,6 @@ public class ListaLibro implements Serializable{
 		}
 	}
 	
-	public NodoLibro eliminarUltimo(){
-		int i = 0;
-		if(inicio==null) return null;
-		else{
-			NodoLibro aux = inicio;
-			while(i<tamano-2){
-				aux=aux.getSiguiente();
-				i++;
-			}
-			NodoLibro aux2 =aux.getSiguiente();
-			aux.setSiguiente(null);
-			tamano--;
-			return aux2;
-		}
-	}
 	
 	public boolean eliminarPosicion(int posicion){
 		if(posicion<0 || posicion>tamano-1)  return false;
@@ -161,7 +114,7 @@ public class ListaLibro implements Serializable{
 		}
 	}
 	
-	public int buscarLibro(String n){
+	public NodoLibro buscarLibro(String n){
 		int posicion = 0;
 		boolean encontrado = false;
 		
@@ -169,16 +122,15 @@ public class ListaLibro implements Serializable{
 		while(aux2!=null & !encontrado){
 			if(n==aux2.getLibro().getTitulo()){
 				encontrado=true;
-				return posicion;
+				return aux2;
 			}else{
 				aux2 = aux2.getSiguiente();
-				posicion++;
 			}
 		}
 		if(encontrado) {
-			return posicion;
+			return aux2;
 	}else {
-			return -1;
+			return null;
 		}
 	}
 

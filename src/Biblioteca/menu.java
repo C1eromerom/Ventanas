@@ -91,6 +91,7 @@ public class menu extends JFrame {
 		opcion.add(rdbtnPrestarLibro);
 		opcion.add(rdbtnDevolverLibro);
 		opcion.add(rdbtnListarUsuarios);
+		opcion.add(rdbtnListarLibros);
 		opcion.add(rdbtnModificarUsuario);
 		opcion.add(rdbtnModificarLibro);
 		opcion.add(rdbtnSalir);
@@ -140,9 +141,29 @@ public class menu extends JFrame {
 						e.printStackTrace();
 					}
 					
-						
-				}else if (rdbtnListarUsuarios.isSelected()) {
+				}else if (rdbtnDevolverLibro.isSelected()) {
+					try {
+						DevolverLibro frame = new DevolverLibro(listaUsuario,listaLibro);
+						frame.setVisible(true);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}else if (rdbtnListarLibros.isSelected()) {
+					try {
+						ListarLibros frame = new ListarLibros(listaLibro);
+						frame.setVisible(true);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}		
 					
+				}else if (rdbtnListarUsuarios.isSelected()) {
+					try {
+						ListarUsuarios frame = new ListarUsuarios(listaUsuario);
+						frame.setVisible(true);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}	
+
 						
 				}else if (rdbtnModificarUsuario.isSelected()) {
 					

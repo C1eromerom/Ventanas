@@ -127,6 +127,9 @@ public class Libro {
 	public void setPrestados1(int prestados) {
 		this.prestados = this.prestados+prestados;
 	}
+	public void setPrestados2(int prestados) {
+		this.prestados = this.prestados-prestados;
+	}
 
 	public boolean devolucion(Usuario user, Libro libro){	
 		boolean bucle=false;

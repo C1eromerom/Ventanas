@@ -75,9 +75,9 @@ public class IntoducirLibro extends JFrame {
 				
 				if (ejemplares<=0){
 					JOptionPane.showMessageDialog(null, "Numero de ejemplares invalido");
-				}else if(listaLibro.buscarLibro(textFieldTitulo.getText())==-1) {
+				}else if(listaLibro.buscarLibro(textFieldTitulo.getText())==null) {
 					if(esVacio()==false) {
-					listaLibro.insertarFinal(new NodoLibro(new Libro(textFieldAutor.getText(),textFieldTitulo.getText(),ejemplares, textFieldISBN.getText())));
+					listaLibro.insertarInicio(new NodoLibro(new Libro(textFieldAutor.getText(),textFieldTitulo.getText(),ejemplares, textFieldISBN.getText())));
 					JOptionPane.showMessageDialog(null, "Registro completado");
 					BorrarCampos();
 					}else {

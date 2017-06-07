@@ -10,6 +10,7 @@ public class Usuario {
 	public Usuario(String nombre, String DNI){
 		this.nombre = nombre;
 		this.DNI = DNI;
+		this.lista = new ListaEjemplares();
 	}
 
 	public String getNombre() {
@@ -29,7 +30,7 @@ public class Usuario {
 	}
 	
 	public void insertarLibro( Ejemplar l){
-		lista.insertarInicio(new NodoEjemplar(l));
+		lista.insertarFinal(new NodoEjemplar(l));
 	}
 	
 	public void verLibros(){

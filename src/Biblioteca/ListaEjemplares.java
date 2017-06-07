@@ -62,7 +62,12 @@ public class ListaEjemplares implements Serializable{
 		int contador = 0;
 		
 		while(auxiliar!=null){
-			salida = salida + contador+ "- " + auxiliar.getEjemplar().getTitulo() + "\n";
+			salida = salida + contador+ "- " + auxiliar.getEjemplar().getTitulo() ;
+			if(auxiliar.getEjemplar().getUsuario()!=null) {
+				salida = salida + " || "+auxiliar.getEjemplar().getUsuario().getNombre()+"\n";
+			}else {
+				salida = salida + "\n";
+			}
 			auxiliar = auxiliar.getSiguiente();
 			contador++;
 		}
@@ -88,28 +93,6 @@ public class ListaEjemplares implements Serializable{
 		}
 	}
 	
-	
-	public boolean insertarPosicion(int posicion,NodoEjemplar nodo){
-		if(posicion<0 || posicion>tamano) return false;
-		else{
-			NodoEjemplar aux = inicio;
-			if(posicion==0){
-				insertarInicio(nodo);
-				return true;
-			}else{
-				for(int i=0;i<posicion-1;i++){
-					aux = aux.getSiguiente();
-			
-				}
-				nodo.setSiguiente(aux.getSiguiente());
-				aux.setSiguiente(nodo);
-				tamano++;
-				return true;
-			}
-			
-		}
-	}
-	
 	public boolean eliminarPrimero(){
 		if(inicio==null) return false;
 		else{
@@ -120,21 +103,6 @@ public class ListaEjemplares implements Serializable{
 		}
 	}
 	
-	public NodoEjemplar eliminarUltimo(){
-		int i = 0;
-		if(inicio==null) return null;
-		else{
-			NodoEjemplar aux = inicio;
-			while(i<tamano-2){
-				aux=aux.getSiguiente();
-				i++;
-			}
-			NodoEjemplar aux2 =aux.getSiguiente();
-			aux.setSiguiente(null);
-			tamano--;
-			return aux2;
-		}
-	}
 	
 	public boolean eliminarPosicion(int posicion){
 		if(posicion<0 || posicion>tamano-1)  return false;
@@ -159,6 +127,85 @@ public class ListaEjemplares implements Serializable{
 			}
 			
 		}
+	}
+	
+	public boolean eliminarEjemplar(String n){
+		int posicion = 0;
+		boolean encontrado = false;
+		NodoEjemplar aux2 = getInicio();
+		while(aux2!=null & !encontrado){
+			if(n==aux2.getEjemplar().getUsuario().getNombre()){
+				encontrado=true;
+			}else{
+				aux2 = aux2.getSiguiente();
+				posicion++;
+			}
+		}
+		
+		if(posicion<0 || posicion>tamano-1)  return false;
+		else{
+			NodoEjemplar aux = inicio;
+			NodoEjemplar aux3 = inicio;
+			if(posicion==0){
+				eliminarPrimero();
+				return true;
+			}else{
+				for(int i=0;i<posicion-1;i++){
+					aux = aux.getSiguiente();
+			
+				}
+				for(int i=0;i<posicion+1;i++){
+					aux3 = aux3.getSiguiente();
+			
+				}
+				aux.setSiguiente(aux3);
+				tamano--;
+				return true;
+			}
+			
+		}
+		
+		
+		}
+
+	
+	public NodoEjemplar buscarEjemplar(String n){
+		int posicion = 0;
+		boolean encontrado = false;
+		
+		NodoEjemplar aux2 = getInicio();
+		while(aux2!=null & !encontrado){
+			if(n==aux2.getEjemplar().getTitulo()){
+				encontrado=true;
+				return aux2;
+			}else{
+				aux2 = aux2.getSiguiente();
+			}
+		}
+		if(encontrado) {
+			return aux2;
+	}else {
+			return null;
+		}
+	}
+	
+	public NodoEjemplar buscarUsuario(String n){
+		int posicion = 0;
+		boolean encontrado = false;
+		NodoEjemplar aux2 = getInicio();
+		while(aux2!=null & !encontrado){
+			if(n==aux2.getEjemplar().getUsuario().getNombre()){
+				encontrado=true;
+				return aux2;
+			}else{
+				aux2 = aux2.getSiguiente();
+				posicion++;
+			}
+		}
+		if(encontrado)
+			return aux2;
+		else
+			return null;
 	}
 
 }
