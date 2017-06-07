@@ -1,9 +1,11 @@
 package Biblioteca;
 
+
+
 public class Usuario {
 	private String nombre;
 	private String DNI;
-	private ListaLibrosEnUsuario lista;
+	private ListaEjemplares lista;
 	
 	public Usuario(String nombre, String DNI){
 		this.nombre = nombre;
@@ -18,20 +20,28 @@ public class Usuario {
 		this.nombre = nombre;
 	}
 
-	public ListaLibrosEnUsuario getLista() {
+	public ListaEjemplares getLista() {
 		return lista;
 	}
 
-	public void setLista(ListaLibrosEnUsuario lista) {
+	public void setLista(ListaEjemplares lista) {
 		this.lista = lista;
 	}
 	
-	public void insertarLibro(Libro l){
-		
+	public void insertarLibro( Ejemplar l){
+		lista.insertarInicio(new NodoEjemplar(l));
 	}
 	
 	public void verLibros(){
 		
+	}
+
+	public String getDNI() {
+		return DNI;
+	}
+
+	public void setDNI(String dNI) {
+		DNI = dNI;
 	}
 
 }

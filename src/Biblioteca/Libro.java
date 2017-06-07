@@ -4,28 +4,24 @@ package Biblioteca;
 public class Libro {
 	private String autor;
 	private String titulo;
-	private ListaLibro listaejemplares;
-	private boolean prestados;
+	private ListaEjemplares listaEjemplares;
 	private String ISBN;
 	private int ejemplares;
-	private ListaUsuariosEnLibro lista;
-	private Usuario usuario;
-	private int ejemplar;
+	private int prestados;
 	
 	public Libro(){
 		this.autor = "";
 		this.titulo = "";
 		this.ISBN = "";
-		this.lista = new ListaUsuariosEnLibro();
+		this.listaEjemplares = new ListaEjemplares();
 	}
 
 	public Libro(String autor, String titulo){
 		this.autor = autor;
 		this.titulo = titulo;
-		this.listaejemplares = null;
+		this.listaEjemplares = null;
 		this.ISBN = null;
 		this.ejemplares=0;
-		this.lista = new ListaUsuariosEnLibro();
 	}
 	
 	public String getISBN() {
@@ -36,37 +32,23 @@ public class Libro {
 		ISBN = iSBN;
 	}
 
-	public Libro(String autor, String titulo,int ejemplares, String ISBN,boolean prestados){
+	public Libro(String autor, String titulo,int ejemplares, String ISBN){
 		this.autor = autor;
 		this.titulo = titulo;
 		this.ejemplares = ejemplares;
+		this.prestados=0;
 		this.ISBN = ISBN;
-		this.prestados=prestados;
-		this.lista = new ListaUsuariosEnLibro();
+		this.listaEjemplares = new ListaEjemplares();
 		llenarSubLista();
 	}
 	
-	public Libro(String autor, String titulo,int ejemplar, String ISBN){
-		this.autor = autor;
-		this.titulo = titulo;
-		this.ejemplar = ejemplar;
-		this.ISBN = ISBN;
-	}
 	
-	public ListaLibro getEjemplares() {
-		return listaejemplares;
+	public ListaEjemplares getListaEjemplares() {
+		return listaEjemplares;
 	}
 
-	public void setEjemplares(ListaLibro listaejemplares) {
-		this.listaejemplares = listaejemplares;
-	}
-
-	public boolean getPrestados() {
-		return prestados;
-	}
-
-	public void setPrestados(boolean prestados) {
-		this.prestados = prestados;
+	public void setListaEjemplares(ListaEjemplares listaejemplares) {
+		this.listaEjemplares = listaejemplares;
 	}
 
 	public void setAutor(String autor){
@@ -85,13 +67,21 @@ public class Libro {
 		return titulo;
 	}
 	
-	public int buscar(String n){
+	public int getEjemplares() {
+		return ejemplares;
+	}
+
+	public void setEjemplares(int ejemplares) {
+		this.ejemplares = ejemplares;
+	}
+
+	public int buscarUsuario(String n){
 		int posicion = 0;
 		boolean encontrado = false;
-		ListaUsuariosEnLibro aux = this.lista;
-		NodoUsuariosEnLibro aux2 = aux.getInicio();
+		ListaEjemplares aux = this.listaEjemplares;
+		NodoEjemplar aux2 = aux.getInicio();
 		while(aux2!=null & !encontrado){
-			if(n==aux2.getNombre()){
+			if(n==aux2.getEjemplar().getUsuario().getNombre()){
 				encontrado=true;
 				return posicion;
 			}else{
@@ -105,48 +95,51 @@ public class Libro {
 			return -1;
 	}
 	
-	public boolean prestamo(Usuario user,Libro libro){
-		boolean bucle=false;
-		boolean prestado=false;
+	public void prestamo(Usuario user){
+		boolean bucle=true;
 		int posicion = 0;
-		if(listaejemplares.getTamano()>0){
-			while(bucle=false){
-			if(listaejemplares.getPosicion(posicion)==null){
-				prestado= false;
-			}else if(listaejemplares.getPosicion(posicion).getLibro().getPrestados()==true){
+		if(listaEjemplares.getTamano()>0){
+			while(bucle=true){
+			if(listaEjemplares.getPosicion(posicion)==null){
+				bucle= false;
+			}else if(listaEjemplares.getPosicion(posicion).getEjemplar().getPrestado()==true){
 				posicion++;
 			} else {
-				listaejemplares.getPosicion(posicion).getLibro().setPrestados(true);
-				listaejemplares.getPosicion(posicion).getLibro().setUsuario(user);
-				bucle=true;
+				listaEjemplares.getPosicion(posicion).getEjemplar().setPrestado(true);
+				listaEjemplares.getPosicion(posicion).getEjemplar().setUsuario(user);
+				prestados++;
+				bucle=false;
 			}
-			prestado= true;
 			}
-		}else{
-			prestado= false;
 		}
-		return prestado;
+
 	}
 	
-	public Usuario getUsuario() {
-		return usuario;
+
+	public int getPrestados() {
+		return prestados;
 	}
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public void setPrestados(int prestados) {
+		this.prestados = prestados;
+	}
+	
+	public void setPrestados1(int prestados) {
+		this.prestados = this.prestados+prestados;
 	}
 
 	public boolean devolucion(Usuario user, Libro libro){	
 		boolean bucle=false;
 		boolean devuelto=false;
 		int posicion = 0;
-		if(listaejemplares.getTamano()>0){
+		if(listaEjemplares.getTamano()>0){
 			while(bucle=false){
-			if(listaejemplares.getPosicion(posicion)==null){
+			if(listaEjemplares.getPosicion(posicion)==null){
 				devuelto= false;
-			}else if(listaejemplares.getPosicion(posicion).getLibro().getPrestados()==true && listaejemplares.getPosicion(posicion).getLibro().getUsuario()==user){
-				listaejemplares.getPosicion(posicion).getLibro().setPrestados(false);
-				listaejemplares.getPosicion(posicion).getLibro().setUsuario(null);
+			}else if(listaEjemplares.getPosicion(posicion).getEjemplar().getPrestado()==true && listaEjemplares.getPosicion(posicion).getEjemplar().getUsuario()==user){
+				listaEjemplares.getPosicion(posicion).getEjemplar().setPrestado(false);
+				listaEjemplares.getPosicion(posicion).getEjemplar().setUsuario(null);
+				prestados--;
 				bucle=true;
 			} else {
 				posicion++;
@@ -162,11 +155,11 @@ public class Libro {
 	public int prestados(){	
 		boolean bucle=false;
 		int posicion = 0,prestados=0;
-		if(listaejemplares.getTamano()>0){
+		if(listaEjemplares.getTamano()>0){
 			while(bucle=false){
-			if(listaejemplares.getPosicion(posicion)==null){
+			if(listaEjemplares.getPosicion(posicion)==null){
 				bucle= true;
-			}else if(listaejemplares.getPosicion(posicion).getLibro().getPrestados()==true){
+			}else if(listaEjemplares.getPosicion(posicion).getEjemplar().getPrestado()==true){
 				prestados++;
 				posicion++;
 			} else {
@@ -179,22 +172,16 @@ public class Libro {
 	}
 	
 	public String toString(){
-		NodoUsuariosEnLibro aux = lista.getInicio();
-		String nombre = "";
-		while(aux!=null){
-			nombre = nombre + ", " + aux.getNombre();
-			aux = aux.getSiguiente();
-		}
+		
 		return "Autor: \t\t\t" + autor + "\n" +
 				"Titulo: \t\t" + titulo + "\n" +
 				"Ejemplares: \t\t" + ejemplares + "\n" +
-				"Ejemplares prestados: \t" + prestados + "\n" + 
-				"Usuarios que tienen este libro: " + nombre;
+				"Ejemplares prestados: \t" + prestados() + "\n";
 	}
 	
 	public void llenarSubLista(){
 		for(int i=1;i<=ejemplares;i++){
-			listaejemplares.insertarFinal(new NodoLibro(new Libro(titulo,autor,ejemplar,ISBN,false)));
+			listaEjemplares.insertarFinal(new NodoEjemplar(new Ejemplar(titulo,i,false)));
 		}
 	}
 	

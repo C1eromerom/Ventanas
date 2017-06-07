@@ -160,5 +160,26 @@ public class ListaLibro implements Serializable{
 			
 		}
 	}
+	
+	public int buscarLibro(String n){
+		int posicion = 0;
+		boolean encontrado = false;
+		
+		NodoLibro aux2 = getInicio();
+		while(aux2!=null & !encontrado){
+			if(n==aux2.getLibro().getTitulo()){
+				encontrado=true;
+				return posicion;
+			}else{
+				aux2 = aux2.getSiguiente();
+				posicion++;
+			}
+		}
+		if(encontrado) {
+			return posicion;
+	}else {
+			return -1;
+		}
+	}
 
 }

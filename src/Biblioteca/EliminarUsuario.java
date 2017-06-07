@@ -38,6 +38,7 @@ public class EliminarUsuario extends JFrame {
 		setContentPane(contentPane);
 		
 		JTextArea textAreaUsuarios = new JTextArea();
+		textAreaUsuarios.setEditable(false);
 		textAreaUsuarios.setText(listaUsuario.mostrarNombres());
 		
 		JLabel lblPosicionDelUsuario = new JLabel("Posición del usuario a eliminar");

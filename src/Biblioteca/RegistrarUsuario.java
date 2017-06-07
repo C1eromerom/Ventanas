@@ -54,9 +54,13 @@ public class RegistrarUsuario extends JFrame {
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				
+				if(esVacio()==false) {
 				listaUsuario.insertarFinal(new NodoUsuario(new Usuario(textFieldNombre.getText(),textFieldDNI.getText())));
 				JOptionPane.showMessageDialog(null, "Registro completado");
+				BorrarCampos();
+				}else {
+					JOptionPane.showMessageDialog(null, "Porfavor relleno los campos");
+				}
 			}
 		});
 		
@@ -113,4 +117,19 @@ public class RegistrarUsuario extends JFrame {
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
+	
+	public void BorrarCampos() {
+		textFieldNombre.setText("");
+		textFieldDNI.setText("");
+	}
+	
+	public boolean esVacio() {
+		if(textFieldNombre==null) {
+			return true;
+		}else if(textFieldDNI==null) {
+			return true;
+		}else {
+			return false;
+		}
 }
+	}

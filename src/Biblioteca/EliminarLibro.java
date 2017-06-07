@@ -42,6 +42,7 @@ public class EliminarLibro extends JFrame {
 		setContentPane(contentPane);
 		
 		JTextArea textAreaLibros = new JTextArea();
+		textAreaLibros.setEditable(false);
 		textAreaLibros.setText(listaLibro.mostrarTitulos());
 		
 		JLabel lblPosicinDelLibro = new JLabel("Posici\u00F3n del libro a eliminar");

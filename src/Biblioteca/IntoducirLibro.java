@@ -75,11 +75,17 @@ public class IntoducirLibro extends JFrame {
 				
 				if (ejemplares<=0){
 					JOptionPane.showMessageDialog(null, "Numero de ejemplares invalido");
+				}else if(listaLibro.buscarLibro(textFieldTitulo.getText())==-1) {
+					if(esVacio()==false) {
+					listaLibro.insertarFinal(new NodoLibro(new Libro(textFieldAutor.getText(),textFieldTitulo.getText(),ejemplares, textFieldISBN.getText())));
+					JOptionPane.showMessageDialog(null, "Registro completado");
+					BorrarCampos();
+					}else {
+					JOptionPane.showMessageDialog(null, "Porfavor relleno los campos");
+					}
 				}else{
-					ListaLibro Listaejemplares = null;
-
-				listaLibro.insertarFinal(new NodoLibro(new Libro(textFieldAutor.getText(),textFieldTitulo.getText(),ejemplares, textFieldISBN.getText())));
-				JOptionPane.showMessageDialog(null, "Registro completado");
+					JOptionPane.showMessageDialog(null, "Ese libro ya está en la biblioteca");
+					
 				}
 				
 				
@@ -153,5 +159,19 @@ public class IntoducirLibro extends JFrame {
 					.addGap(61))
 		);
 		contentPane.setLayout(gl_contentPane);
+	}
+	
+	public void BorrarCampos() {
+		textFieldTitulo.setText("");
+		textFieldAutor.setText("");
+		textFieldISBN.setText("");
+	}
+	
+	public boolean esVacio() {
+		if(textFieldAutor.getText()==""||textFieldTitulo.getText()==""||textFieldISBN.getText()=="") {
+			return true;
+		}else {
+			return false;
+		}
 	}
 }
