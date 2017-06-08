@@ -56,7 +56,7 @@ public class DevolverLibro extends JFrame {
 		textFieldDNI.setColumns(10);
 		JComboBox comboBox = new JComboBox();
 		rellenarUsuario(comboBox);
-		
+
 		JButton btnSiguiente = new JButton("Siguiente");
 		if(aux.getSiguiente()==null) {
 			btnSiguiente.setEnabled(false);
@@ -89,6 +89,7 @@ public class DevolverLibro extends JFrame {
 		JButton btnDevolver = new JButton("Devolver");
 		btnDevolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
 				if(devolucion(listaLibro,comboBox)==true){
 					rellenarUsuario(comboBox);
 					JOptionPane.showMessageDialog(null, "Devolución completada con exito");
@@ -169,10 +170,12 @@ public class DevolverLibro extends JFrame {
 			}
 	}
 	public boolean devolucion(ListaLibro listaLibro,JComboBox comboBox){	
-		if(listaLibro.BuscarEjemplar(listaLibro,comboBox,aux)!=null){
+		String valor=(String) comboBox.getSelectedItem();
+		NodoEjemplar auxiliar= listaLibro.BuscarEjemplar(valor,aux);
+		if(listaLibro.BuscarEjemplar(valor,aux)!=null){
 		aux.getUser().getLista().eliminarPosicion(comboBox.getSelectedIndex());
-		listaLibro.BuscarEjemplar(listaLibro,comboBox,aux).getEjemplar().setPrestado(false);
-		listaLibro.BuscarEjemplar(listaLibro,comboBox,aux).getEjemplar().setUsuario(null);
+		auxiliar.getEjemplar().setPrestado(false);
+		auxiliar.getEjemplar().setUsuario(null);
 		//listaLibro.buscarLibro(comboBox.getName()).getLibro().setPrestados2(1);
 		return true;
 		}else{

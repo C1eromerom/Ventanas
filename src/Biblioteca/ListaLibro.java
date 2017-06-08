@@ -136,47 +136,46 @@ public class ListaLibro implements Serializable{
 		}
 	}
 	
-	public NodoEjemplar BuscarEjemplar(ListaLibro listaLibro,JComboBox comboBox,NodoUsuario user){	
-		boolean bucle=false;
-		NodoLibro auxiliar = listaLibro.getInicio(); 
+	public NodoEjemplar BuscarEjemplar(String nombre,NodoUsuario user){	
+		
+		NodoLibro auxiliar = getInicio(); 
 		NodoEjemplar auxiliar2 = auxiliar.getLibro().getListaEjemplares().getInicio();
-		if(listaLibro.getTamano()>0){
-			while(bucle=false){
-				auxiliar2 = auxiliar.getLibro().getListaEjemplares().getInicio();
-				if(auxiliar2==null){
-					auxiliar=auxiliar.getSiguiente();
-				}else if(auxiliar2.getEjemplar().getPrestado()==true && auxiliar2.getEjemplar().getUsuario()==user.getUser() && user.getUser().getNombre()==comboBox.getName()){
-					bucle=true;
-				} else {
-					auxiliar2=auxiliar2.getSiguiente();
+		NodoEjemplar auxiliar3 = null;
+		if(getTamano()>0){
+			while(auxiliar!=null){
+				if(auxiliar.getLibro().getTitulo()==nombre&&auxiliar2!=null) {
+						while(auxiliar2!=null) {
+							if(auxiliar2.getEjemplar().getUsuario()==user.getUser() && auxiliar2.getEjemplar().getPrestado()==true) {
+								auxiliar3=auxiliar2;
+								auxiliar2=auxiliar2.getSiguiente();
+								auxiliar = auxiliar.getSiguiente();
+							}else {
+								auxiliar2=auxiliar2.getSiguiente();
+							}
+						}							
+				}else {
+					auxiliar = auxiliar.getSiguiente();
+					if(auxiliar!=null) {
+					auxiliar2=auxiliar.getLibro().getListaEjemplares().getInicio();
+					}
 				}
 			}
 		}else {
 		}
-		return auxiliar2;
+		return auxiliar3;
 	}
 	public void EliminarUsuarios(NodoUsuario user){	
-		boolean bucle=false;
-		NodoLibro auxiliar = getInicio(); 
-		NodoEjemplar auxiliar2 = auxiliar.getLibro().getListaEjemplares().getInicio();
-		if(getTamano()>0){
-			while(bucle=false){
-				if(auxiliar!=null){
-					auxiliar2 = auxiliar.getLibro().getListaEjemplares().getInicio();
-					if(auxiliar2==null){
-						auxiliar=auxiliar.getSiguiente();
-					}else if(auxiliar2.getEjemplar().getPrestado()==true && auxiliar2.getEjemplar().getUsuario()==user.getUser()){
-						auxiliar2.getEjemplar().setPrestado(false);
-						auxiliar2.getEjemplar().setUsuario(null);
-					}else{
-						auxiliar2=auxiliar2.getSiguiente();
-					}
-				} else {
-				bucle=true;
-				}
-			}
-		}
-	}
+			NodoEjemplar auxiliar3;
+		for(NodoEjemplar auxiliar2 =user.getUser().getLista().getInicio();auxiliar2!=null;auxiliar2=auxiliar2.getSiguiente()) {
+			auxiliar3 = BuscarEjemplar(auxiliar2.getEjemplar().getTitulo(),user);
+			auxiliar3.getEjemplar().setPrestado(false);
+			auxiliar3.getEjemplar().setUsuario(null);
 
+			
+		}
+		
+		
+		
+	}
 
 }

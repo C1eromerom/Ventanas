@@ -102,7 +102,7 @@ public class ListaUsuario implements Serializable{
 			if(posicion==0){
 				return aux;
 			}else{
-				for(int i=0;i<posicion-1;i++){
+				for(int i=0;i<posicion;i++){
 					aux = aux.getSiguiente();
 			
 				}

@@ -52,6 +52,7 @@ public class EliminarUsuario extends JFrame {
 				
 				int posicion=(Integer)spinner.getValue();
 				if(listaUsuario.buscarPosicion(posicion)!=null){
+					System.out.print(listaUsuario.buscarPosicion(posicion).getUser().getNombre());
 					listaLibro.EliminarUsuarios(listaUsuario.buscarPosicion(posicion));
 					listaUsuario.eliminarPosicion(posicion);
 					JOptionPane.showMessageDialog(null, "Se ha eliminado correctamente");
